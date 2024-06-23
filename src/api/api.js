@@ -1,8 +1,8 @@
-const API_KEY = "qZnM0O90ToIjBiq9GvT9382";
+const API_KEY = "f7a47109-fc99-4ae3-aab4-31dc3770cb9e";
 
 export const getMatches = () => {
-  const url = `https://cricapi.com/api/matches?apikey=${API_KEY}`;
-  console.log("URL", url);
+  const url = `https://api.cricapi.com/v1/matches?apikey=${API_KEY}&offset=0`;
+
   return fetch(url)
     .then((response) => {
       return response.json();
@@ -15,7 +15,8 @@ export const getMatches = () => {
 //get the score of the cuurent match
 
 export const getMatchDetail = (id) => {
-  const url = `https://cricapi.com/api/cricketScore?unique_id=${id}&apikey=${API_KEY}`;
+  const url = `https://api.cricapi.com/v1/match_info?apikey=${API_KEY}&offset=0&id=${id}`;
+
   return fetch(url)
     .then((response) => response.json())
     .catch((error) => console.log(error));

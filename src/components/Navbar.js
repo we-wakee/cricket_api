@@ -9,9 +9,7 @@ import {
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 
-const useStyle = makeStyles((theme) => {
-  console.log("STYLE", theme);
-});
+const useStyle = makeStyles((theme) => {});
 
 const Navbar = () => {
   const classes = useStyle();

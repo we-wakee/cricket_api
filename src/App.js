@@ -11,8 +11,7 @@ function App() {
   useEffect(() => {
     getMatches()
       .then((data) => {
-        console.log(data);
-        setMatches(data.matches);
+        setMatches(data.data);
       })
       .catch((error) => {});
   }, []);
@@ -23,9 +22,10 @@ function App() {
       <Container>
         <Grid container>
           <Grid item xs={12}>
-            {matches.map((match) => (
-              <MyCard match={match}></MyCard>
-            ))}
+            {matches &&
+              matches.map((match) => (
+                <MyCard key={match.id} match={match}></MyCard>
+              ))}
           </Grid>
         </Grid>
       </Container>

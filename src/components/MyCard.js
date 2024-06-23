@@ -18,9 +18,8 @@ import {
 import { getMatchDetail } from "../api/api";
 
 const MyCard = ({ match }) => {
-  const [detail, setDatail] = useState({});
+  const [detail, setDetail] = useState({});
   const [open, setOpen] = useState(false);
-
   const getMatchCard = () => (
     <div>
       <Card
@@ -32,7 +31,7 @@ const MyCard = ({ match }) => {
         <CardContent>
           <Grid container justify="center" alignItems="center" spacing={4}>
             <Grid item>
-              <Typography variant="h5">{match["team-1"]}</Typography>
+              <Typography variant="h5">{match.teams[0]}</Typography>
             </Grid>
             <Grid item>
               <img
@@ -42,7 +41,7 @@ const MyCard = ({ match }) => {
               />
             </Grid>
             <Grid item>
-              <Typography variant="h5">{match["team-2"]}</Typography>
+              <Typography variant="h5">{match.teams[1]}</Typography>
             </Grid>
           </Grid>
         </CardContent>
@@ -51,7 +50,7 @@ const MyCard = ({ match }) => {
           <Grid container justify="center">
             <Button
               onClick={() => {
-                showDetailBtnClicked(match["unique_id"]);
+                showDetailBtnClicked(match.id);
               }}
               variant="outlined"
               color="secondary"
@@ -75,7 +74,7 @@ const MyCard = ({ match }) => {
     getMatchDetail(id)
       .then((data) => {
         console.log(data);
-        setDatail(data);
+        setDetail(data.data);
         handleClickOpen();
       })
       .catch((error) => {
@@ -93,7 +92,7 @@ const MyCard = ({ match }) => {
 
   return (
     <>
-      {match.type == "Twenty20" ? getMatchCard() : ""}
+      {match.matchType === "t20" ? getMatchCard() : ""}
       <Dialog
         open={open}
         onClose={handleClose}
@@ -103,7 +102,7 @@ const MyCard = ({ match }) => {
         <DialogTitle id="alert-dialog-title">{"Match Detail..."}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            <Typography>{detail.stat}</Typography>
+            <Typography>{detail.status}</Typography>
             <Typography>
               Match
               <span style={{ fontStyle: "italic", fontWeight: "bold" }}>
